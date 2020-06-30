@@ -3,92 +3,41 @@ const mongoose = require("mongoose");
 const path = require('path');
 const router = require("express").Router();
 const Transaction = require("../models/workout.js");
-//const app = express();
 
-
-
-router.post("/submit", (req, res) => {
-    console.log(req.body);
-    
-    db.notes.insert(req.body, (error, data) => {
-        if (error) {
-            res.send(error);
-        } else {
-            res.send(data);
-        }
-    });
-});
+// router.post("/api/workouts/", (req, res) => {
+//     Transaction.create({})
+//       .then(dbTransaction => {
+//         res.json(dbTransaction);
+//       })
+//       .catch(err => {
+//         res.status(400).json(err);
+//       });
+// });
 
 router.get("/exercise", (req, res) => {
     res.sendFile("./exercise.html", { root: path.join(__dirname, '../public') });
 });
 
-router.post("/submit", (req, res) => {
-    console.log(req.body);
-    
-    db.notes.insert(req.body, (error, data) => {
-        if (error) {
-            res.send(error);
-        } else {
-            res.send(data);
-        }rs
-    });
+router.get("/stats", (req, res) => {
+    res.sendFile("./stats.html", { root: path.join(__dirname, '../public') });
 });
 
-router.get("/find/:id", (req, res) => {
-    db.notes.findOne(
-        {
-            _id: mongojs.ObjectId(req.params.id)
-        },
-        (error, data) => {
-            if (error) {
-                res.send(error);
-            } else {
-                res.send(data);
-            }
-        }
-        );
-});
-    
-router.post("/update/:id", (req, res) => {
-    db.notes.update(
-        {
-            _id: mongojs.ObjectId(req.params.id)
-        },
-        {
-            $set: {
-                title: req.body.title,
-                note: req.body.note,
-                modified: Date.now()
-            }
-        },
-        (error, data) => {
-            if (error) {
-                res.send(error);
-            } else {
-                res.send(data);
-            }
-        }
-        );
-});
-        
-router.delete("/delete/:id", (req, res) => {
-    db.notes.remove(
-        {
-            _id: mongojs.ObjectID(req.params.id)
-        },
-        (error, data) => {
-            if (error) {
-                res.send(error);
-            } else {
-                res.send(data);
-            }
-        }
-        );
-});
+// router.put('/api/workouts/:id',(req, res) =>{
+//     Transaction.findByIdAndUpdate(
+//         req.params.id,
+//         {$push: {exercises: req.body}},
+//         // {new: true, runValidators: true}
+//     )
+//     .then(dbWorkout => {
+//         res.json(dbWorkout);
+//     })
+//     .catch(err => {
+//         res.json(err);
+//     })
+// });
             
 router.delete("/clearall", (req, res) => {
-    db.notes.remove({}, (error, response) => {
+    Transaction.remove({}, (error, response) => {
         if (error) {
             res.send(error);
         } else {
@@ -96,7 +45,17 @@ router.delete("/clearall", (req, res) => {
         }
     });
 });
-            
+
+// router.get("/api/workouts/range", (req, res) => {
+//     Transaction.find({}, (error, data) => {
+//         if (error) {
+//             res.send(error);
+//         } else {
+//             res.json(data);
+//         }
+//     });
+// });
+
 router.get("/", (req, res) => {
     db.notes.find({}, (error, data) => {
         if (error) {
