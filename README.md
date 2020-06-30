@@ -53,4 +53,4 @@ If you want to see more of my work please click here https://api.github.com/user
 
 ## GitHub Repo/Deployment
 * [WorkOutTracker GitHub Repo](https://github.com/deawar/WorkOutTracker)<br>
-* [Heroku Deployed App URL](https://herokuapp.com)
+* [Heroku Deployed App URL](https://cryptic-tor-43629.herokuapp.com/)

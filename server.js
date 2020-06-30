@@ -36,6 +36,6 @@ app.get("/", (req, res) => {
 app.use(require("./routes/apiroutes.js"));
 app.use(require("./routes/htmlroutes.js"));
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("App running on port 3000!");
 });
